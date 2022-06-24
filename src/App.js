@@ -1,11 +1,10 @@
 import './App.css';
+import RoutePage from './routes/router';
 
 function App() {
   return (
-    <div className="App">
-      <h1>App</h1>
-    </div>
-  );
+    <RoutePage />
+  )
 }
 
 export default App;

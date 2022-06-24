@@ -1,7 +1,9 @@
 
 let cacheData = "appV1"
 
-this.addEventListener("install", (event)=> {
+//  adding to cache 
+
+this.addEventListener("install", (event) => {
     event.waitUntil(
         caches.open(cacheData)
             .then((cache) => {
@@ -10,7 +12,9 @@ this.addEventListener("install", (event)=> {
                     '/static/js/0.chunk.js',
                     '/static/js/bundle.js',
                     'index.html',
-                    '/'
+                    '/',
+                    '/user',
+                    '/about'
 
                 ])
 
@@ -18,11 +22,16 @@ this.addEventListener("install", (event)=> {
     )
 })
 
-this.addEventListener('fetch', (event)=> {
-    event.respondWith(
-        caches.match(event.request)
-            .then((resp) => {
-                if(resp) return resp
-            })
-    )
+
+// fetching from cache
+
+this.addEventListener('fetch', (event) => {
+    if(navigator.onLine){
+        event.respondWith(
+            caches.match(event.request)
+                .then((resp) => {
+                    if (resp) return resp
+                })
+        )
+    }
 })
